@@ -50,16 +50,72 @@ This project is a simple web application that provides personalized workout reco
 5. **Open the Application:**
     - Open your web browser and go to `http://127.0.0.1:8000` to access the application.
 
-## Project Structure
+API Endpoints
+POST /classify/
 
-```plaintext
-.
-├── main.py                 # The FastAPI application backend
-├── index.html              # The frontend HTML file
-├── README.md               # This README file
-├── requirements.txt        # Python packages required for the project
-├── static                  # Directory for static assets (CSS, images, etc.)
-│   └── style.css           # Custom CSS file
-└── templates               # Directory for HTML templates (if using Jinja2 with FastAPI)
+Description: Analyzes user input and returns sentiment classification.
+Request Body:
+json
+Always show details
 
+Copy code
+{
+    "user_input": "I want to improve my cardio and strength."
+}
+Response:
+json
+Always show details
 
+Copy code
+{
+    "explanation": "It seems like you're feeling positive. We detected a positive sentiment with 96.45% confidence."
+}
+POST /recommendation/
+
+Description: Generates personalized workout recommendations and an AI-powered suggestion.
+Request Body:
+json
+Always show details
+
+Copy code
+{
+    "username": "John",
+    "goals": ["strength", "cardio"],
+    "fitness_level": "intermediate"
+}
+Response:
+json
+Always show details
+
+Copy code
+{
+    "username": "John",
+    "recommendations": [
+        {
+            "workout_name": "Intermediate Strength Training",
+            "workout_type": "Strength",
+            "duration_minutes": 30,
+            "intensity": "medium"
+        },
+        {
+            "workout_name": "Intermediate Cardio Session",
+            "workout_type": "Cardio",
+            "duration_minutes": 25,
+            "intensity": "medium"
+        }
+    ],
+    "ai_recommendation": "Based on your goals, we recommend trying Peloton's HIIT Cardio program for maximum results!"
+}
+Contributing
+Contributions are welcome! Please open an issue or submit a pull request with any changes.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+Contact
+For any inquiries, please contact yourname@domain.com. """
+
+Saving the README content to a file
+file_path = "/mnt/data/README.md" with open(file_path, "w") as file: file.write(readme_content)
+
+file_path
