@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,8 +125,8 @@
             <option value="advanced">Advanced</option>
         </select>
 
-        <label for="user_input">Describe Your Goals:</label>
-        <input type="text" id="user_input" name="user_input" placeholder="e.g., I want to improve my cardio and strength." required>
+        <label for="user_input">What are you feeling right now?:</label>
+        <input type="text" id="user_input" name="user_input" placeholder="e.g., I am happy to workout today" required>
         
         <button type="submit">Get Recommendations</button>
     </form>
@@ -142,10 +141,10 @@
         <div id="output"></div>
     </div>
 
-    <div id="aiRecommendation" class="ai-recommendation" style="display: none;">
-        <h2>AI-Powered Peloton Recommendation:</h2>
+  <!--  <div id="aiRecommendation" class="ai-recommendation" style="display: none;">
+        <h2>AI-Powered Peloton Product Recommendation:</h2>
         <div id="aiOutput"></div>
-    </div>
+    </div>---->
 
     <script>
         document.getElementById('recommendationForm').addEventListener('submit', async function(event) {
@@ -200,7 +199,7 @@
                 document.getElementById('userOutput').innerText = recommendationData.username;
                 document.getElementById('recommendations').style.display = 'block';
 
-                // Display AI-generated recommendation
+                // Display AI-generated Peloton product recommendation
                 const aiOutputDiv = document.getElementById('aiOutput');
                 aiOutputDiv.innerText = recommendationData.ai_recommendation;
                 document.getElementById('aiRecommendation').style.display = 'block';

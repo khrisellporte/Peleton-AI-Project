@@ -63,9 +63,21 @@ workout_data: Dict[str, Dict[str, WorkoutRecommendation]] = {
     },
 }
 
+# Sample Peloton product data
+peloton_products = [
+    {"name": "Peloton Bike", "description": "A high-tech indoor bike designed for cardio and strength training."},
+    {"name": "Peloton Tread", "description": "A treadmill built for running, walking, and total body workouts."},
+    {"name": "Peloton Guide", "description": "An AI-powered guide to strength training that adapts to your form."},
+    {"name": "Peloton App", "description": "A digital platform offering thousands of live and on-demand classes."},
+    {"name": "Peloton Bike+", "description": "An upgraded version of the Peloton Bike with additional features."},
+    {"name": "Peloton Heart Rate Band", "description": "A heart rate monitor that helps you track your workout intensity."},
+    {"name": "Peloton Weights", "description": "A set of dumbbells designed for strength training at home."},
+    {"name": "Peloton Yoga Mat", "description": "A high-quality mat for yoga, stretching, and floor exercises."}
+]
+
 @app.post("/recommendation/", response_model=RecommendationResponse)
 def get_workout_recommendation(user: User) -> RecommendationResponse:
-    # Generate predefined recommendations
+    # Generate predefined workout recommendations
     recommendations = []
     for goal in user.goals:
         if goal in workout_data:
@@ -76,9 +88,15 @@ def get_workout_recommendation(user: User) -> RecommendationResponse:
     if not recommendations:
         recommendations.append(WorkoutRecommendation(workout_name="General Fitness", workout_type="Mixed", duration_minutes=30, intensity="medium"))
 
-    # Generate AI recommendation
-    prompt = f"Suggest a Peloton workout plan for a user who is {user.fitness_level} level and wants to focus on {', '.join(user.goals)}."
-    ai_recommendation = recommendation_model(prompt, max_length=50, num_return_sequences=1)[0]['generated_text'].strip()
+    # Generate AI recommendation for a Peloton product
+    prompt = f"Suggest a Peloton product for a user who is {user.fitness_level} level and wants to focus on {', '.join(user.goals)}."
+    ai_recommendation_response = recommendation_model(prompt, max_length=50, num_return_sequences=1)[0]
+    ai_recommendation_text = ai_recommendation_response['generated_text'].strip()
+
+    # Select a Peloton product from the list based on user input (simplified logic)
+    selected_product = peloton_products[0]  # Simplified selection for example purposes
+
+    ai_recommendation = f"We recommend the {selected_product['name']}: {selected_product['description']}"
 
     return RecommendationResponse(
         username=user.username,
